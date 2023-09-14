@@ -1,0 +1,109 @@
+{
+  "name": "mybpm-template-application",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "mybpm-template",
+  "sourceRoot": "apps/mybpm-template-application/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/mybpm-template-application",
+        "index": "apps/mybpm-template-application/src/index.html",
+        "main": "apps/mybpm-template-application/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/mybpm-template-application/tsconfig.app.json",
+        "assets": [
+          "apps/mybpm-template-application/src/favicon.ico",
+          "apps/mybpm-template-application/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ngx-kz/icons/src/assets/",
+            "output": "./assets/"
+          }
+
+        ],
+        "styles": ["apps/mybpm-template-application/src/styles.scss",
+          "./node_modules/@ngx-kz/notifications/src/styles/toastr-styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "mybpm-template-application:build:production"
+        },
+        "development": {
+          "browserTarget": "mybpm-template-application:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "mybpm-template-application:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/mybpm-template-application/**/*.ts",
+          "apps/mybpm-template-application/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/mybpm-template-application/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "mybpm-template-application:build"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "@angular/cdk/overlay-prebuilt.css";
+
+body{
+  margin: 0;
+  height: 100vh;
+  background: #e9edee;
+}
+
+.toast-container {
+  pointer-events: auto !important;
+  bottom: 46px !important;
+}
+
+.dialog-panel {
+  max-width: none !important;
+
+  mat-dialog-container {
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+.boi-dialog-viewer-resize {
+  max-width: none !important;
+
+  mat-dialog-container {
+    padding: 0;
+    overflow: visible;
+
+    box-shadow: none;
+    background: none;
+  }
+}
